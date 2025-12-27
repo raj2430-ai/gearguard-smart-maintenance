@@ -6,7 +6,9 @@ import {
   Calendar, 
   BarChart3,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Settings,
+  Bell
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -18,6 +20,11 @@ const navItems = [
   { path: '/maintenance', icon: ClipboardList, label: 'Maintenance' },
   { path: '/calendar', icon: Calendar, label: 'Calendar' },
   { path: '/reports', icon: BarChart3, label: 'Reports' },
+];
+
+const bottomNavItems = [
+  { path: '/notifications', icon: Bell, label: 'Notifications' },
+  { path: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 export const Sidebar = () => {
@@ -56,6 +63,32 @@ export const Sidebar = () => {
           );
         })}
       </nav>
+
+      {/* Bottom nav items */}
+      <div className="p-3 space-y-1 border-t border-border">
+        {bottomNavItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          
+          return (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={cn(
+                "nav-item group",
+                isActive && "active"
+              )}
+            >
+              <item.icon className={cn(
+                "h-5 w-5 flex-shrink-0 transition-colors",
+                isActive ? "text-sidebar-accent-foreground" : "text-muted-foreground group-hover:text-foreground"
+              )} />
+              {!collapsed && (
+                <span className="animate-fade-in">{item.label}</span>
+              )}
+            </NavLink>
+          );
+        })}
+      </div>
 
       <div className="p-3 border-t border-border">
         <Button
