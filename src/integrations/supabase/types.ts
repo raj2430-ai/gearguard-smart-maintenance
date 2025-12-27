@@ -14,7 +14,120 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_notifications: {
+        Row: {
+          body: string
+          id: string
+          notification_type: string
+          recipient_email: string
+          sent_at: string
+          status: string | null
+          subject: string
+          user_id: string | null
+        }
+        Insert: {
+          body: string
+          id?: string
+          notification_type: string
+          recipient_email: string
+          sent_at?: string
+          status?: string | null
+          subject: string
+          user_id?: string | null
+        }
+        Update: {
+          body?: string
+          id?: string
+          notification_type?: string
+          recipient_email?: string
+          sent_at?: string
+          status?: string | null
+          subject?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      notification_preferences: {
+        Row: {
+          created_at: string
+          daily_digest: boolean | null
+          email_notifications: boolean | null
+          id: string
+          new_request_assigned: boolean | null
+          overdue_alerts: boolean | null
+          push_notifications: boolean | null
+          status_updates: boolean | null
+          updated_at: string
+          user_id: string
+          weekly_report: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          daily_digest?: boolean | null
+          email_notifications?: boolean | null
+          id?: string
+          new_request_assigned?: boolean | null
+          overdue_alerts?: boolean | null
+          push_notifications?: boolean | null
+          status_updates?: boolean | null
+          updated_at?: string
+          user_id: string
+          weekly_report?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          daily_digest?: boolean | null
+          email_notifications?: boolean | null
+          id?: string
+          new_request_assigned?: boolean | null
+          overdue_alerts?: boolean | null
+          push_notifications?: boolean | null
+          status_updates?: boolean | null
+          updated_at?: string
+          user_id?: string
+          weekly_report?: boolean | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          department: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
