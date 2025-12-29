@@ -6,13 +6,12 @@ import { CreateRequestModal } from '@/components/maintenance/CreateRequestModal'
 import { Button } from '@/components/ui/button';
 import { Plus, Wrench, ClipboardList, CheckCircle2, AlertTriangle, Calendar } from 'lucide-react';
 import { maintenanceRequests as initialRequests, dashboardStats } from '@/data/mockData';
-import { MaintenanceRequest, MaintenanceStatus } from '@/types/maintenance';
 
 const Dashboard = () => {
-  const [requests, setRequests] = useState<MaintenanceRequest[]>(initialRequests);
+  const [requests, setRequests] = useState(initialRequests);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-  const handleUpdateStatus = (id: string, newStatus: MaintenanceStatus) => {
+  const handleUpdateStatus = (id, newStatus) => {
     setRequests(prev => 
       prev.map(r => r.id === id ? { ...r, status: newStatus } : r)
     );

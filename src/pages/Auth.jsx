@@ -26,18 +26,16 @@ const resetSchema = z.object({
   email: z.string().trim().email('Please enter a valid email address'),
 });
 
-type AuthMode = 'signin' | 'signup' | 'reset';
-
 const Auth = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading, signIn, signUp } = useAuth();
   
-  const [mode, setMode] = useState<AuthMode>('signin');
+  const [mode, setMode] = useState('signin');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{ fullName?: string; email?: string; password?: string }>({});
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (user && !authLoading) {
@@ -47,7 +45,7 @@ const Auth = () => {
 
   const clearErrors = () => setErrors({});
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     clearErrors();
     
@@ -55,9 +53,9 @@ const Auth = () => {
       loginSchema.parse({ email, password });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const fieldErrors: typeof errors = {};
+        const fieldErrors = {};
         error.errors.forEach((err) => {
-          if (err.path[0]) fieldErrors[err.path[0] as keyof typeof errors] = err.message;
+          if (err.path[0]) fieldErrors[err.path[0]] = err.message;
         });
         setErrors(fieldErrors);
         return;
@@ -82,7 +80,7 @@ const Auth = () => {
     }
   };
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     clearErrors();
     
@@ -90,9 +88,9 @@ const Auth = () => {
       signupSchema.parse({ fullName, email, password });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const fieldErrors: typeof errors = {};
+        const fieldErrors = {};
         error.errors.forEach((err) => {
-          if (err.path[0]) fieldErrors[err.path[0] as keyof typeof errors] = err.message;
+          if (err.path[0]) fieldErrors[err.path[0]] = err.message;
         });
         setErrors(fieldErrors);
         return;
@@ -126,7 +124,7 @@ const Auth = () => {
     }
   };
 
-  const handlePasswordReset = async (e: React.FormEvent) => {
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
     clearErrors();
     
@@ -134,9 +132,9 @@ const Auth = () => {
       resetSchema.parse({ email });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const fieldErrors: typeof errors = {};
+        const fieldErrors = {};
         error.errors.forEach((err) => {
-          if (err.path[0]) fieldErrors[err.path[0] as keyof typeof errors] = err.message;
+          if (err.path[0]) fieldErrors[err.path[0]] = err.message;
         });
         setErrors(fieldErrors);
         return;
