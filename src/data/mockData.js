@@ -1,6 +1,4 @@
-import { Equipment, MaintenanceRequest, MaintenanceTeam, Technician, DashboardStats } from '@/types/maintenance';
-
-export const technicians: Technician[] = [
+export const technicians = [
   { id: '1', name: 'Alex Rivera', avatar: 'AR', email: 'alex@gearguard.com', specialization: 'Electrical' },
   { id: '2', name: 'Sarah Chen', avatar: 'SC', email: 'sarah@gearguard.com', specialization: 'Mechanical' },
   { id: '3', name: 'Mike Johnson', avatar: 'MJ', email: 'mike@gearguard.com', specialization: 'HVAC' },
@@ -8,13 +6,13 @@ export const technicians: Technician[] = [
   { id: '5', name: 'David Kim', avatar: 'DK', email: 'david@gearguard.com', specialization: 'Electronics' },
 ];
 
-export const maintenanceTeams: MaintenanceTeam[] = [
+export const maintenanceTeams = [
   { id: '1', name: 'Electrical Team', members: [technicians[0], technicians[4]] },
   { id: '2', name: 'Mechanical Team', members: [technicians[1], technicians[3]] },
   { id: '3', name: 'HVAC Team', members: [technicians[2]] },
 ];
 
-export const equipment: Equipment[] = [
+export const equipment = [
   {
     id: '1',
     name: 'CNC Machine Alpha',
@@ -93,7 +91,7 @@ export const equipment: Equipment[] = [
   },
 ];
 
-export const maintenanceRequests: MaintenanceRequest[] = [
+export const maintenanceRequests = [
   {
     id: '1',
     subject: 'Motor overheating issue',
@@ -235,7 +233,7 @@ export const maintenanceRequests: MaintenanceRequest[] = [
   },
 ];
 
-export const dashboardStats: DashboardStats = {
+export const dashboardStats = {
   totalEquipment: equipment.length,
   activeRequests: maintenanceRequests.filter(r => r.status === 'in_progress').length,
   completedThisMonth: maintenanceRequests.filter(r => r.status === 'repaired').length,
