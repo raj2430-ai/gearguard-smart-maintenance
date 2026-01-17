@@ -1,20 +1,7 @@
-import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
-interface StatCardProps {
-  title: string;
-  value: number | string;
-  icon: ReactNode;
-  trend?: {
-    value: number;
-    direction: 'up' | 'down' | 'neutral';
-  };
-  className?: string;
-  iconClassName?: string;
-}
-
-export const StatCard = ({ title, value, icon, trend, className, iconClassName }: StatCardProps) => {
+export const StatCard = ({ title, value, icon, trend, className, iconClassName }) => {
   return (
     <div className={cn("stat-card group hover:shadow-elevated transition-shadow duration-200", className)}>
       <div className="flex items-start justify-between">

@@ -1,26 +1,20 @@
 import { useState } from 'react';
-import { MaintenanceRequest, MaintenanceStatus } from '@/types/maintenance';
 import { KanbanColumn } from './KanbanColumn';
 import { RequestDetailSheet } from './RequestDetailSheet';
 
-interface KanbanBoardProps {
-  requests: MaintenanceRequest[];
-  onUpdateStatus: (id: string, status: MaintenanceStatus) => void;
-}
-
-const columns: { status: MaintenanceStatus; title: string }[] = [
+const columns = [
   { status: 'new', title: 'New' },
   { status: 'in_progress', title: 'In Progress' },
   { status: 'repaired', title: 'Repaired' },
   { status: 'scrap', title: 'Scrap' },
 ];
 
-export const KanbanBoard = ({ requests, onUpdateStatus }: KanbanBoardProps) => {
-  const [draggedId, setDraggedId] = useState<string | null>(null);
-  const [dragOverStatus, setDragOverStatus] = useState<MaintenanceStatus | null>(null);
-  const [selectedRequest, setSelectedRequest] = useState<MaintenanceRequest | null>(null);
+export const KanbanBoard = ({ requests, onUpdateStatus }) => {
+  const [draggedId, setDraggedId] = useState(null);
+  const [dragOverStatus, setDragOverStatus] = useState(null);
+  const [selectedRequest, setSelectedRequest] = useState(null);
 
-  const handleDragStart = (e: React.DragEvent, id: string) => {
+  const handleDragStart = (e, id) => {
     setDraggedId(id);
     e.dataTransfer.effectAllowed = 'move';
   };
@@ -30,12 +24,12 @@ export const KanbanBoard = ({ requests, onUpdateStatus }: KanbanBoardProps) => {
     setDragOverStatus(null);
   };
 
-  const handleDragOver = (e: React.DragEvent, status: MaintenanceStatus) => {
+  const handleDragOver = (e, status) => {
     e.preventDefault();
     setDragOverStatus(status);
   };
 
-  const handleDrop = (e: React.DragEvent, status: MaintenanceStatus) => {
+  const handleDrop = (e, status) => {
     e.preventDefault();
     if (draggedId) {
       onUpdateStatus(draggedId, status);
@@ -44,7 +38,7 @@ export const KanbanBoard = ({ requests, onUpdateStatus }: KanbanBoardProps) => {
     setDragOverStatus(null);
   };
 
-  const getRequestsByStatus = (status: MaintenanceStatus) => {
+  const getRequestsByStatus = (status) => {
     return requests.filter((r) => r.status === status);
   };
 

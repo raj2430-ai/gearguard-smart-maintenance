@@ -1,17 +1,8 @@
-import { MaintenanceRequest } from '@/types/maintenance';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
-
-interface KanbanCardProps {
-  request: MaintenanceRequest;
-  isDragging?: boolean;
-  onDragStart?: (e: React.DragEvent, id: string) => void;
-  onDragEnd?: () => void;
-  onClick?: () => void;
-}
 
 export const KanbanCard = ({ 
   request, 
@@ -19,8 +10,8 @@ export const KanbanCard = ({
   onDragStart, 
   onDragEnd,
   onClick 
-}: KanbanCardProps) => {
-  const formatDuration = (minutes: number) => {
+}) => {
+  const formatDuration = (minutes) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;

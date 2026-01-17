@@ -22,18 +22,9 @@ import {
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
-interface Notification {
-  id: string;
-  type: 'assigned' | 'overdue' | 'completed' | 'status' | 'reminder';
-  title: string;
-  message: string;
-  timestamp: Date;
-  read: boolean;
-}
-
 export const NotificationDropdown = () => {
   const navigate = useNavigate();
-  const [notifications, setNotifications] = useState<Notification[]>([
+  const [notifications, setNotifications] = useState([
     {
       id: '1',
       type: 'assigned',
@@ -62,17 +53,18 @@ export const NotificationDropdown = () => {
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  const getIcon = (type: Notification['type']) => {
+  const getIcon = (type) => {
     switch (type) {
       case 'assigned': return <Wrench className="h-4 w-4 text-primary" />;
       case 'overdue': return <AlertTriangle className="h-4 w-4 text-destructive" />;
       case 'completed': return <CheckCircle2 className="h-4 w-4 text-status-repaired" />;
       case 'status': return <Clock className="h-4 w-4 text-status-progress" />;
       case 'reminder': return <Calendar className="h-4 w-4 text-primary" />;
+      default: return <Bell className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
-  const markAsRead = (id: string) => {
+  const markAsRead = (id) => {
     setNotifications(prev => 
       prev.map(n => n.id === id ? { ...n, read: true } : n)
     );

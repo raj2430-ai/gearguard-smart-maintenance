@@ -1,18 +1,5 @@
-import { MaintenanceRequest, MaintenanceStatus } from '@/types/maintenance';
 import { KanbanCard } from './KanbanCard';
 import { cn } from '@/lib/utils';
-
-interface KanbanColumnProps {
-  title: string;
-  status: MaintenanceStatus;
-  requests: MaintenanceRequest[];
-  onDragStart: (e: React.DragEvent, id: string) => void;
-  onDragEnd: () => void;
-  onDragOver: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent, status: MaintenanceStatus) => void;
-  isDragOver: boolean;
-  onCardClick: (request: MaintenanceRequest) => void;
-}
 
 const statusColors = {
   new: 'bg-muted-foreground',
@@ -31,7 +18,7 @@ export const KanbanColumn = ({
   onDrop,
   isDragOver,
   onCardClick,
-}: KanbanColumnProps) => {
+}) => {
   return (
     <div
       className={cn(

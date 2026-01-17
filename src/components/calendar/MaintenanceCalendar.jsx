@@ -5,29 +5,20 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { format, isSameDay, startOfMonth, endOfMonth, eachDayOfInterval, addMonths, subMonths } from 'date-fns';
-import { MaintenanceRequest } from '@/types/maintenance';
 import { cn } from '@/lib/utils';
 
-interface MaintenanceCalendarProps {
-  requests: MaintenanceRequest[];
-  onDateClick: (date: Date) => void;
-  onRequestClick: (request: MaintenanceRequest) => void;
-}
-
-type ViewMode = 'month' | 'week' | 'day';
-
-export const MaintenanceCalendar = ({ requests, onDateClick, onRequestClick }: MaintenanceCalendarProps) => {
+export const MaintenanceCalendar = ({ requests, onDateClick, onRequestClick }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [viewMode, setViewMode] = useState<ViewMode>('month');
+  const [viewMode, setViewMode] = useState('month');
 
   // Filter only preventive maintenance requests
   const preventiveRequests = requests.filter(r => r.type === 'preventive' && r.scheduledDate);
 
-  const getRequestsForDate = (date: Date) => {
+  const getRequestsForDate = (date) => {
     return preventiveRequests.filter(r => r.scheduledDate && isSameDay(r.scheduledDate, date));
   };
 
-  const navigateMonth = (direction: 'prev' | 'next') => {
+  const navigateMonth = (direction) => {
     setCurrentDate(direction === 'prev' ? subMonths(currentDate, 1) : addMonths(currentDate, 1));
   };
 
@@ -62,7 +53,7 @@ export const MaintenanceCalendar = ({ requests, onDateClick, onRequestClick }: M
 
         <div className="flex items-center gap-2">
           <div className="flex items-center bg-muted rounded-lg p-1">
-            {(['month', 'week', 'day'] as ViewMode[]).map((mode) => (
+            {['month', 'week', 'day'].map((mode) => (
               <Button
                 key={mode}
                 variant={viewMode === mode ? 'default' : 'ghost'}
