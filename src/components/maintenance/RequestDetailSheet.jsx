@@ -1,4 +1,3 @@
-import { MaintenanceRequest } from '@/types/maintenance';
 import {
   Sheet,
   SheetContent,
@@ -23,12 +22,6 @@ import {
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 
-interface RequestDetailSheetProps {
-  request: MaintenanceRequest | null;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
 const statusConfig = {
   new: { label: 'New', icon: Clock, className: 'status-new' },
   in_progress: { label: 'In Progress', icon: Wrench, className: 'status-progress' },
@@ -36,7 +29,7 @@ const statusConfig = {
   scrap: { label: 'Scrapped', icon: XCircle, className: 'status-scrap' },
 };
 
-export const RequestDetailSheet = ({ request, open, onOpenChange }: RequestDetailSheetProps) => {
+export const RequestDetailSheet = ({ request, open, onOpenChange }) => {
   if (!request) return null;
 
   const status = statusConfig[request.status];

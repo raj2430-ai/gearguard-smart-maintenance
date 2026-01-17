@@ -1,4 +1,3 @@
-import { Equipment } from '@/types/maintenance';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -6,17 +5,13 @@ import { Eye, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 
-interface EquipmentTableProps {
-  equipment: Equipment[];
-}
-
 const statusStyles = {
   operational: 'bg-status-repaired-bg text-status-repaired',
   maintenance: 'bg-status-progress-bg text-status-progress',
   offline: 'bg-status-scrap-bg text-status-scrap',
 };
 
-export const EquipmentTable = ({ equipment }: EquipmentTableProps) => {
+export const EquipmentTable = ({ equipment }) => {
   const navigate = useNavigate();
 
   return (

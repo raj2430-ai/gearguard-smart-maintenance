@@ -12,20 +12,13 @@ import { CalendarIcon, Users, User } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { equipment } from '@/data/mockData';
-import { Equipment, MaintenanceType } from '@/types/maintenance';
 
-interface CreateRequestModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  defaultDate?: Date;
-}
-
-export const CreateRequestModal = ({ open, onOpenChange, defaultDate }: CreateRequestModalProps) => {
+export const CreateRequestModal = ({ open, onOpenChange, defaultDate }) => {
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(null);
-  const [requestType, setRequestType] = useState<MaintenanceType>('corrective');
-  const [scheduledDate, setScheduledDate] = useState<Date | undefined>(defaultDate);
+  const [selectedEquipment, setSelectedEquipment] = useState(null);
+  const [requestType, setRequestType] = useState('corrective');
+  const [scheduledDate, setScheduledDate] = useState(defaultDate);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   // Auto-fill team and technician when equipment is selected (Odoo onchange behavior)
@@ -42,7 +35,7 @@ export const CreateRequestModal = ({ open, onOpenChange, defaultDate }: CreateRe
     }
   }, [defaultDate]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
     console.log({ subject, description, selectedEquipment, requestType, scheduledDate });
@@ -133,7 +126,7 @@ export const CreateRequestModal = ({ open, onOpenChange, defaultDate }: CreateRe
           {/* Request Type */}
           <div className="space-y-2">
             <Label>Request Type *</Label>
-            <Select value={requestType} onValueChange={(v) => setRequestType(v as MaintenanceType)}>
+            <Select value={requestType} onValueChange={(v) => setRequestType(v)}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

@@ -1,12 +1,7 @@
-import { ReactNode } from 'react';
 import { TopNavbar } from './TopNavbar';
 import { Sidebar } from './Sidebar';
 
-interface MainLayoutProps {
-  children: ReactNode;
-}
-
-export const MainLayout = ({ children }: MainLayoutProps) => {
+export const MainLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-background">
       <TopNavbar />
